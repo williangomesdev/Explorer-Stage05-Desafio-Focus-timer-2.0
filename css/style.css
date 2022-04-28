@@ -1,0 +1,216 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+:root {
+  --bg-main-color: hsla(0, 0%, 100%, 1);
+  --bg-base: 240;
+  --bg-button: hsla(var(--bg-base), 9%, 89%, 1);
+  --bg-button-hover: hsla(194, 97%, 31%, 1);
+  --fc: hsla(var(--bg-base), 6%, 21%, 1);
+  font-size: 62.5%;
+}
+
+*::selection {
+  background: var(--bg-button-hover);
+  color: #ffffff;
+}
+
+body {
+  background: var(--bg-main-color);
+  color: var(--fc);
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  display: grid;
+}
+
+main {
+  align-self: center;
+  justify-self: center;
+  max-width: 82.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 19.2rem;
+}
+
+button {
+  transition: all 0.2s ease;
+}
+
+.hide {
+  display: none;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+}
+.clock {
+  text-align: center;
+  display: flex;
+}
+
+.clock span {
+  font-weight: 500;
+  font-size: clamp(12.6rem, 5.6rem + 15vw, 12.6rem);
+  line-height: 14.8rem;
+  text-transform: uppercase;
+}
+
+.settingsButtonGroup {
+  display: flex;
+  justify-content: space-between;
+  width: 31.8rem;
+}
+
+.buttonSettings {
+  width: clamp(4.8rem, 2rem, 6.4rem);
+  height: clamp(4.8rem, 2rem, 6.4rem);
+  background: transparent;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.buttonSettings:hover {
+  background: var(--bg-button-hover);
+}
+
+#playButton {
+  background-image: url("../assets/images/play.svg");
+}
+
+.buttonSettings:hover#playButton{
+  background-image: url("../assets/images/playHover.svg");
+}
+
+#pauseButton {
+  background-image: url("../assets/images/pause.svg");
+}
+
+.buttonSettings:hover#pauseButton{
+  background-image: url("../assets/images/pauseHover.svg");
+}
+
+#stopButton {
+  background-image: url("../assets/images/stop.svg");
+}
+
+.buttonSettings:hover#stopButton{
+  background-image: url("../assets/images/stopHover.svg");
+}
+
+#addButton {
+  background-image: url("../assets/images/add.svg");
+}
+
+.buttonSettings:hover#addButton{
+  background-image: url("../assets/images/addHover.svg");
+}
+
+#subtractButton {
+  background-image: url("../assets/images/subtract.svg");
+}
+
+.buttonSettings:hover#subtractButton{
+  background-image: url("../assets/images/subtractHover.svg");
+}
+
+.soundCards {
+  display: grid;
+  grid-template-areas:
+    "forest rain"
+    "coffeshop fireplace";
+  gap: 3.2rem;
+}
+
+.cardSound {
+  width: 13.8rem;
+  height: 15.2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.4rem;
+}
+
+.cardSound:hover {
+  background: var(--bg-button-hover);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#forestCard {
+  background-image: url("../assets/images/forest.svg");
+}
+
+.cardSound:hover#forestCard {
+  background-image: url("../assets/images/forestHover.svg");
+}
+
+#rainCard {
+  background-image: url("../assets/images/rain.svg");
+}
+
+.cardSound:hover#rainCard {
+  background-image: url("../assets/images/rainHover.svg");
+}
+
+#coffeShopCard {
+  background-image: url("../assets/images/coffeShop.svg");
+}
+
+.cardSound:hover#coffeShopCard {
+  background-image: url("../assets/images/coffeShopHover.svg");
+}
+
+#firePlaceCard {
+  background-image: url("../assets/images/firePlace.svg");
+}
+
+.cardSound:hover#firePlaceCard {
+  background-image: url("../assets/images/firePlaceHover.svg");
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 55%;
+  }
+
+  main {
+    flex-direction: column;
+    gap: 6rem;
+    margin: 0 auto;
+  }
+
+  .soundCards {
+    display: flex;
+  }
+
+  .buttonSettings {
+    background-size: contain;
+  }
+}
+
+@media (max-width: 375px) {
+  :root {
+    font-size: 50%;
+  }
+
+  main {
+    flex-direction: column;
+    gap: 6rem;
+    margin: 0 auto;
+  }
+
+  .soundCards {
+    display: grid;
+  }
+}
