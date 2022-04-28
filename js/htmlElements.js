@@ -10,4 +10,11 @@ const rainCard = document.querySelector("#rainCard");
 const coffeShopCard = document.querySelector("#coffeShopCard");
 const firePlaceCard = document.querySelector("#firePlaceCard");
 
-export { playButton, pauseButton };
+export {
+  playButton,
+  pauseButton,
+  forestCard,
+  rainCard,
+  coffeShopCard,
+  firePlaceCard,
+};

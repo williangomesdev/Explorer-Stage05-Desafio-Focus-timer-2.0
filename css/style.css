@@ -9,8 +9,9 @@
   --bg-main-color: hsla(0, 0%, 100%, 1);
   --bg-base: 240;
   --bg-button: hsla(var(--bg-base), 9%, 89%, 1);
-  --bg-base-hover:194;
-  --bg-button-hover: hsla(var(--bg-base-hover), 97%, 31%, 1);
+  --bg-base-hover: 194;
+  --bg-button-hover: hsla(var(--bg-base-hover), 97%, 41%, 1);
+  --bg-button-hover-active: hsla(var(--bg-base-hover), 97%, 31%, 1);
   --fc: hsla(var(--bg-base), 6%, 21%, 1);
   font-size: 62.5%;
 }
@@ -38,12 +39,12 @@ main {
   gap: 19.2rem;
 }
 
-button {
-  transition: all 0.2s ease;
-}
-
 .hide {
   display: none;
+}
+
+button {
+  transition: all 0.2s ease;
 }
 
 .timer {
@@ -89,7 +90,7 @@ button {
   background-image: url("../assets/images/play.svg");
 }
 
-.buttonSettings:hover#playButton{
+.buttonSettings:hover#playButton {
   background-image: url("../assets/images/playHover.svg");
 }
 
@@ -97,7 +98,7 @@ button {
   background-image: url("../assets/images/pause.svg");
 }
 
-.buttonSettings:hover#pauseButton{
+.buttonSettings:hover#pauseButton {
   background-image: url("../assets/images/pauseHover.svg");
 }
 
@@ -105,7 +106,7 @@ button {
   background-image: url("../assets/images/stop.svg");
 }
 
-.buttonSettings:hover#stopButton{
+.buttonSettings:hover#stopButton {
   background-image: url("../assets/images/stopHover.svg");
 }
 
@@ -113,7 +114,7 @@ button {
   background-image: url("../assets/images/add.svg");
 }
 
-.buttonSettings:hover#addButton{
+.buttonSettings:hover#addButton {
   background-image: url("../assets/images/addHover.svg");
 }
 
@@ -121,7 +122,7 @@ button {
   background-image: url("../assets/images/subtract.svg");
 }
 
-.buttonSettings:hover#subtractButton{
+.buttonSettings:hover#subtractButton {
   background-image: url("../assets/images/subtractHover.svg");
 }
 
@@ -150,11 +151,24 @@ button {
   background-position: center;
 }
 
+.activeCard {
+  width: 13.8rem;
+  height: 15.2rem;
+  background: var(--bg-button-hover-active);
+  background-repeat: no-repeat !important;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.4rem;
+}
+
 #forestCard {
   background-image: url("../assets/images/forest.svg");
 }
 
-.cardSound:hover#forestCard {
+.cardSound:hover#forestCard,
+.activeCard#forestCard {
   background-image: url("../assets/images/forestHover.svg");
 }
 
@@ -162,7 +176,8 @@ button {
   background-image: url("../assets/images/rain.svg");
 }
 
-.cardSound:hover#rainCard {
+.cardSound:hover#rainCard,
+.activeCard#rainCard {
   background-image: url("../assets/images/rainHover.svg");
 }
 
@@ -170,7 +185,8 @@ button {
   background-image: url("../assets/images/coffeShop.svg");
 }
 
-.cardSound:hover#coffeShopCard {
+.cardSound:hover#coffeShopCard,
+.activeCard#coffeShopCard {
   background-image: url("../assets/images/coffeShopHover.svg");
 }
 
@@ -178,7 +194,8 @@ button {
   background-image: url("../assets/images/firePlace.svg");
 }
 
-.cardSound:hover#firePlaceCard {
+.cardSound:hover#firePlaceCard,
+.activeCard#firePlaceCard {
   background-image: url("../assets/images/firePlaceHover.svg");
 }
 
