@@ -52,6 +52,7 @@ button {
   justify-content: center;
   gap: 1.7rem;
 }
+
 .clock {
   text-align: center;
   display: flex;
