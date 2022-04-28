@@ -30,28 +30,23 @@ function updateTimerDisplay(minutes, seconds) {
 }
 
 //diminui o seconds a cada 1 segundo, função recursiva
-//Acada segundo em 0 minuto diminui em 1
+//A cada segundo em 0 minuto diminui em 1
 function countDownSeconds() {
   setTimeout(function () {
     let seconds = Number(secondsDisplay.textContent);
     let minutes = Number(minutesDisplay.textContent);
 
-    /*  secondsDisplay.textContent = "00"; */
     updateTimerDisplay(minutes, 0);
 
-    if (minutes <= 0) {
+    if ((minutes <= 0) & (seconds == 0)) {
       resetControls();
       return;
     }
-
     if (seconds <= 0) {
-      seconds = 2;
+      seconds = 60;
       --minutes;
-
-      /* minutesDisplay.textContent = String(minutes - 1).padStart(2, "0"); */
-      /*  updateTimerDisplay(String(minutes - 1), seconds); */
     }
-    /* secondsDisplay.textContent = String(seconds - 1).padStart(2, "0"); */
+
     updateTimerDisplay(minutes, String(seconds - 1));
     countDownSeconds();
   }, 1000);
