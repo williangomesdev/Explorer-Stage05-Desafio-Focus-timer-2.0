@@ -11,8 +11,13 @@ const coffeShopCard = document.querySelector("#coffeShopCard");
 const firePlaceCard = document.querySelector("#firePlaceCard");
 
 export {
+  minutesDisplay,
+  secondsDisplay,
   playButton,
   pauseButton,
+  stopButton,
+  addButton,
+  subtractButton,
   forestCard,
   rainCard,
   coffeShopCard,
