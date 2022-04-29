@@ -9,29 +9,51 @@ const forestCard = document.querySelector("#forestCard");
 const rainCard = document.querySelector("#rainCard");
 const coffeShopCard = document.querySelector("#coffeShopCard");
 const firePlaceCard = document.querySelector("#firePlaceCard");
+let timerTimeOut;
 let count = 0;
 
+//Converter elemento em valor numérico
+function displayNumber(display) {
+  let number = Number(display.textContent);
+  return number;
+}
 
+//Timer countdown
+function countDownSeconds() {
+  timerTimeOut = setTimeout(function () {
+    let seconds = displayNumber(secondsDisplay);
+    if (seconds <= 0) {
+      seconds = 60;
+    }
 
+    secondsDisplay.textContent = seconds - 1;
+
+    countDownSeconds();
+  }, 1000);
+}
 
 //Evento botão play/pause
 playButton.addEventListener("click", function () {
   playButton.classList.add("hide");
   pauseButton.classList.remove("hide");
-  addButton.setAttribute("disabled","disabled")
-  subtractButton.setAttribute("disabled","disabled")
+  addButton.setAttribute("disabled", "disabled");
+  subtractButton.setAttribute("disabled", "disabled");
+  countDownSeconds();
 });
 
 pauseButton.addEventListener("click", function () {
   pauseButton.classList.add("hide");
   playButton.classList.remove("hide");
-  addButton.removeAttribute("disabled")
-  subtractButton.removeAttribute("disabled")
+  addButton.removeAttribute("disabled");
+  subtractButton.removeAttribute("disabled");
+  clearTimeout(timerTimeOut);
 });
 
 stopButton.addEventListener("click", function () {
   pauseButton.classList.add("hide");
   playButton.classList.remove("hide");
+  addButton.removeAttribute("disabled");
+  subtractButton.removeAttribute("disabled");
 });
 
 addButton.addEventListener("click", function () {
