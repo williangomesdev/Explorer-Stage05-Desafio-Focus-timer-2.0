@@ -1,140 +1,72 @@
-import {
-  minutesDisplay,
-  secondsDisplay,
-  playButton,
-  pauseButton,
-  stopButton,
-  addButton,
-  subtractButton,
-  forestCard,
-  rainCard,
-  coffeShopCard,
-  firePlaceCard,
-} from "./htmlElements.js";
+import { html } from "./htmlElements.js";
+import Timer from "./timerSettings.js";
+import Controls from "./controlsSettings.js";
 
-//count é usado no contador de minutos
-let count = 0;
 
-//Reiniciar os botões de modo padrão aós finalizar o cronometro
-function resetControls() {
-  playButton.classList.remove("hide");
-  pauseButton.classList.add("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
-}
 
-//atualização dos minutos no minutos no display
-function updateTimerDisplay(minutes, seconds) {
-  minutesDisplay.textContent = String(minutes).padStart(2, "0");
-  secondsDisplay.textContent = String(seconds).padStart(2, "0");
-}
-
-//diminui o seconds a cada 1 segundo, função recursiva
-//A cada segundo em 0 minuto diminui em 1
-function countDownSeconds() {
-  setTimeout(function () {
-    let seconds = Number(secondsDisplay.textContent);
-    let minutes = Number(minutesDisplay.textContent);
-
-    updateTimerDisplay(minutes, 0);
-
-    if ((minutes <= 0) & (seconds == 0)) {
-      resetControls();
-      return;
-    }
-    if (seconds <= 0) {
-      seconds = 60;
-      --minutes;
-    }
-
-    updateTimerDisplay(minutes, String(seconds - 1));
-    countDownSeconds();
-  }, 1000);
-}
-
-//Evento botão play/pause
-playButton.addEventListener("click", function () {
-  playButton.classList.add("hide");
-  pauseButton.classList.remove("hide");
-  addButton.setAttribute("disabled", "disabled");
-  subtractButton.setAttribute("disabled", "disabled");
-
-  countDownSeconds();
+//Objeto com as dependências da Factory Timer
+//Injetar dependências na factory Timer
+const timer = Timer({
+  minutesDisplay: html.minutesDisplay,
+  secondsDisplay: html.secondsDisplay,
+  minutesDisplayValue: html.minutesDisplayValue,
+  secondsDisplayValue: html.secondsDisplayValue,
+  timerTimeOut: html.timerTimeOut,
 });
 
-pauseButton.addEventListener("click", function () {
-  playButton.classList.remove("hide");
-  pauseButton.classList.add("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
+//Objeto com as dependências da Factory Controls
+//Injetar dependências na factory Controls
+const controls = Controls({
+  count: html.count,
+  timer: timer,
+  playButton: html.playButton,
+  pauseButton: html.pauseButton,
+  addButton: html.addButton,
+  subtractButton: html.subtractButton,
+  forestCard: html.forestCard,
+  rainCard: html.rainCard,
+  coffeShopCard: html.coffeShopCard,
+  firePlaceCard: html.firePlaceCard,
 });
 
-stopButton.addEventListener("click", function () {
-  resetControls();
+
+//Evento botão play/pause/stop/add/subtract
+html.playButton.addEventListener("click", function () {
+  controls.play();
+  timer.countDownSeconds();
 });
 
-addButton.addEventListener("click", function () {
-  if (count <= 90) {
-    count = count + 5;
-  } else {
-    addButton.disable = true;
-  }
-
-  minutesDisplay.textContent = String(count).padStart(2, "0");
+html.pauseButton.addEventListener("click", function () {
+  controls.pause();
+  clearTimeout(html.timerTimeOut);
 });
 
-subtractButton.addEventListener("click", function () {
-  if (count <= 0) {
-    subtractButton.disable = true;
-  } else if (count >= 5) {
-    subtractButton.disable = false;
-    count = count - 5;
-  }
+html.stopButton.addEventListener("click", function () {
+  controls.reset();
+  timer.reset();
+});
 
-  minutesDisplay.textContent = String(count).padStart(2, "0");
+html.addButton.addEventListener("click", function () {
+  controls.addButtonValue();
+});
+
+html.subtractButton.addEventListener("click", function () {
+  controls.subtractButtonValue();
 });
 
 //Eventos Cards
-forestCard.addEventListener("click", function () {
-  forestCard.classList.toggle("cardSound");
-  forestCard.classList.toggle("activeCard");
-  rainCard.classList.remove("activeCard");
-  rainCard.classList.add("cardSound");
-  coffeShopCard.classList.remove("activeCard");
-  coffeShopCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+html.forestCard.addEventListener("click", function () {
+  controls.forestButtonActive();
 });
 
-rainCard.addEventListener("click", function () {
-  rainCard.classList.toggle("cardSound");
-  rainCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  coffeShopCard.classList.remove("activeCard");
-  coffeShopCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+html.rainCard.addEventListener("click", function () {
+  controls.rainButtonActive();
 });
 
-coffeShopCard.addEventListener("click", function () {
-  coffeShopCard.classList.toggle("cardSound");
-  coffeShopCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  rainCard.classList.remove("activeCard");
-  rainCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+html.coffeShopCard.addEventListener("click", function () {
+  controls.coffeShopButtonActive();
 });
 
-firePlaceCard.addEventListener("click", function () {
-  firePlaceCard.classList.toggle("cardSound");
-  firePlaceCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  rainCard.classList.remove("activeCard");
-  coffeShopCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  rainCard.classList.add("cardSound");
-  coffeShopCard.classList.add("cardSound");
+html.firePlaceCard.addEventListener("click", function () {
+  controls.firePlaceButtonActive();
 });

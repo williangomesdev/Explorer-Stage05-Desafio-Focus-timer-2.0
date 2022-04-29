@@ -1,5 +1,7 @@
 const minutesDisplay = document.querySelector("#minutes");
 const secondsDisplay = document.querySelector("#seconds");
+const minutesDisplayValue = Number(minutesDisplay.textContent);
+const secondsDisplayValue = Number(secondsDisplay.textContent);
 const playButton = document.querySelector("#playButton");
 const pauseButton = document.querySelector("#pauseButton");
 const stopButton = document.querySelector("#stopButton");
@@ -9,9 +11,16 @@ const forestCard = document.querySelector("#forestCard");
 const rainCard = document.querySelector("#rainCard");
 const coffeShopCard = document.querySelector("#coffeShopCard");
 const firePlaceCard = document.querySelector("#firePlaceCard");
+//count é usado no contador de minutos
+let count = 0;
 
-export {
+//variável para armazenar o setTimeOut
+let timerTimeOut = true;
+
+export const html = {
   minutesDisplay,
+  minutesDisplayValue,
+  secondsDisplayValue,
   secondsDisplay,
   playButton,
   pauseButton,
@@ -22,4 +31,6 @@ export {
   rainCard,
   coffeShopCard,
   firePlaceCard,
+  count,
+  timerTimeOut,
 };
