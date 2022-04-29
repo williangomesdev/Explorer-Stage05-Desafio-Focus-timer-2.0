@@ -9,24 +9,49 @@ const forestCard = document.querySelector("#forestCard");
 const rainCard = document.querySelector("#rainCard");
 const coffeShopCard = document.querySelector("#coffeShopCard");
 const firePlaceCard = document.querySelector("#firePlaceCard");
+const standardMinutes = 0;
+const standardSeconds = 0;
 let timerTimeOut;
 let count = 0;
 
-//Converter elemento em valor numérico
+//Timer Converter elemento em valor numérico
 function displayNumber(display) {
   let number = Number(display.textContent);
   return number;
+}
+
+//Timer Atualização de valores do timer
+function updateStandardTimeValue(minutesValue, secondsValue) {
+  minutesDisplay.textContent = String(minutesValue).padStart(2, "0");
+  secondsDisplay.textContent = String(secondsValue).padStart(2, "0");
+}
+
+//Controls resetar controles para o padrão
+function resetControls() {
+  pauseButton.classList.add("hide");
+  playButton.classList.remove("hide");
+  addButton.removeAttribute("disabled");
+  subtractButton.removeAttribute("disabled");
 }
 
 //Timer countdown
 function countDownSeconds() {
   timerTimeOut = setTimeout(function () {
     let seconds = displayNumber(secondsDisplay);
-    if (seconds <= 0) {
-      seconds = 60;
+    let minutes = displayNumber(minutesDisplay);
+
+    if (minutes == 0 && seconds == 0) {
+      resetControls();
+      return;
     }
 
-    secondsDisplay.textContent = seconds - 1;
+    if (seconds <= 0) {
+      seconds = 3;
+
+      minutesDisplay.textContent = String(minutes - 1).padStart(2, "0");
+    }
+
+    secondsDisplay.textContent = String(seconds - 1).padStart(2, "0");
 
     countDownSeconds();
   }, 1000);
@@ -42,18 +67,8 @@ playButton.addEventListener("click", function () {
 });
 
 pauseButton.addEventListener("click", function () {
-  pauseButton.classList.add("hide");
-  playButton.classList.remove("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
+  resetControls();
   clearTimeout(timerTimeOut);
-});
-
-stopButton.addEventListener("click", function () {
-  pauseButton.classList.add("hide");
-  playButton.classList.remove("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
 });
 
 addButton.addEventListener("click", function () {
@@ -73,6 +88,12 @@ subtractButton.addEventListener("click", function () {
   }
 
   minutesDisplay.textContent = String(count).padStart(2, "0");
+});
+
+stopButton.addEventListener("click", function () {
+  resetControls();
+  updateStandardTimeValue(standardMinutes, standardSeconds);
+  count = 0;
 });
 
 //Eventos Cards
