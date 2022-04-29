@@ -1,28 +1,32 @@
-import {
-  minutesDisplay,
-  secondsDisplay,
-  playButton,
-  pauseButton,
-  stopButton,
-  addButton,
-  subtractButton,
-  forestCard,
-  rainCard,
-  coffeShopCard,
-  firePlaceCard,
-} from "./htmlElements.js";
-
+const minutesDisplay = document.querySelector("#minutes");
+const secondsDisplay = document.querySelector("#seconds");
+const playButton = document.querySelector("#playButton");
+const pauseButton = document.querySelector("#pauseButton");
+const stopButton = document.querySelector("#stopButton");
+const addButton = document.querySelector("#addButton");
+const subtractButton = document.querySelector("#subtractButton");
+const forestCard = document.querySelector("#forestCard");
+const rainCard = document.querySelector("#rainCard");
+const coffeShopCard = document.querySelector("#coffeShopCard");
+const firePlaceCard = document.querySelector("#firePlaceCard");
 let count = 0;
+
+
+
 
 //Evento botão play/pause
 playButton.addEventListener("click", function () {
   playButton.classList.add("hide");
   pauseButton.classList.remove("hide");
+  addButton.setAttribute("disabled","disabled")
+  subtractButton.setAttribute("disabled","disabled")
 });
 
 pauseButton.addEventListener("click", function () {
   pauseButton.classList.add("hide");
   playButton.classList.remove("hide");
+  addButton.removeAttribute("disabled")
+  subtractButton.removeAttribute("disabled")
 });
 
 stopButton.addEventListener("click", function () {
