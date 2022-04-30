@@ -14,6 +14,14 @@ const standardSeconds = 0;
 let timerTimeOut;
 let count = 0;
 
+//Controls resetar controles para o padrão
+function resetControls() {
+  pauseButton.classList.add("hide");
+  playButton.classList.remove("hide");
+  addButton.removeAttribute("disabled");
+  subtractButton.removeAttribute("disabled");
+}
+
 //Timer Converter elemento em valor numérico
 function displayNumber(display) {
   let number = Number(display.textContent);
@@ -24,14 +32,6 @@ function displayNumber(display) {
 function updateStandardTimeValue(minutesValue, secondsValue) {
   minutesDisplay.textContent = String(minutesValue).padStart(2, "0");
   secondsDisplay.textContent = String(secondsValue).padStart(2, "0");
-}
-
-//Controls resetar controles para o padrão
-function resetControls() {
-  pauseButton.classList.add("hide");
-  playButton.classList.remove("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
 }
 
 //Timer countdown
@@ -46,12 +46,11 @@ function countDownSeconds() {
     }
 
     if (seconds <= 0) {
-      seconds = 3;
-
-      minutesDisplay.textContent = String(minutes - 1).padStart(2, "0");
+      seconds = 60;
+      --minutes;
     }
 
-    secondsDisplay.textContent = String(seconds - 1).padStart(2, "0");
+    updateStandardTimeValue(minutes, String(seconds - 1));
 
     countDownSeconds();
   }, 1000);
