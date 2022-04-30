@@ -4,11 +4,7 @@ export default function Controls({
   addButton,
   subtractButton,
   count,
-  standardMinutes,
-  standardSeconds,
   minutesDisplay,
-  secondsDisplay,
-  timer,
 }) {
   //Controls resetar controles para o padrão
   function reset() {

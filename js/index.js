@@ -17,51 +17,26 @@ const standardSeconds = 0;
 let timerTimeOut;
 let count = 0;
 
-const timer = Timer({
-  minutesDisplay,
-  secondsDisplay,
-  timerTimeOut,
-});
-
 const controls = Controls({
   playButton,
   pauseButton,
   addButton,
   subtractButton,
   count,
-  standardMinutes,
-  standardSeconds,
   minutesDisplay,
-  secondsDisplay,
-  timer,
 });
 
-//Timer countdown
-function countDownSeconds() {
-  timerTimeOut = setTimeout(function () {
-    let seconds = timer.displayNumber(secondsDisplay);
-    let minutes = timer.displayNumber(minutesDisplay);
-
-    if (minutes == 0 && seconds == 0) {
-      resetControls();
-      return;
-    }
-
-    if (seconds <= 0) {
-      seconds = 60;
-      --minutes;
-    }
-
-    timer.updateStandardTimeValue(minutes, String(seconds - 1));
-
-    countDownSeconds();
-  }, 1000);
-}
+const timer = Timer({
+  minutesDisplay,
+  secondsDisplay,
+  timerTimeOut,
+  resetControls: controls.reset,
+});
 
 //Evento botão play/pause
 playButton.addEventListener("click", function () {
   controls.play();
-  countDownSeconds();
+  timer.countDownSeconds();
 });
 
 pauseButton.addEventListener("click", function () {
