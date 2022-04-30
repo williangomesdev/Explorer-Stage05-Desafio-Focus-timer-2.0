@@ -22,8 +22,11 @@ const controls = Controls({
   addButton,
   subtractButton,
   count,
+  standardMinutes,
+  standardSeconds,
   minutesDisplay,
   secondsDisplay,
+  updateStandardTimeValue,
 });
 
 //Timer Converter elemento em valor numérico

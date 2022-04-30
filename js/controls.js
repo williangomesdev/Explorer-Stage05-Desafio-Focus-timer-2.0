@@ -8,6 +8,7 @@ export default function Controls({
   standardSeconds,
   minutesDisplay,
   secondsDisplay,
+  updateStandardTimeValue,
 }) {
   //Controls resetar controles para o padrão
   function reset() {
