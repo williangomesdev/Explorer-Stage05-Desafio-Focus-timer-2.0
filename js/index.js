@@ -1,3 +1,5 @@
+import Controls from "./controls.js";
+
 const minutesDisplay = document.querySelector("#minutes");
 const secondsDisplay = document.querySelector("#seconds");
 const playButton = document.querySelector("#playButton");
@@ -14,13 +16,15 @@ const standardSeconds = 0;
 let timerTimeOut;
 let count = 0;
 
-//Controls resetar controles para o padrão
-function resetControls() {
-  pauseButton.classList.add("hide");
-  playButton.classList.remove("hide");
-  addButton.removeAttribute("disabled");
-  subtractButton.removeAttribute("disabled");
-}
+const controls = Controls({
+  playButton,
+  pauseButton,
+  addButton,
+  subtractButton,
+  count,
+  minutesDisplay,
+  secondsDisplay,
+});
 
 //Timer Converter elemento em valor numérico
 function displayNumber(display) {
@@ -41,7 +45,7 @@ function countDownSeconds() {
     let minutes = displayNumber(minutesDisplay);
 
     if (minutes == 0 && seconds == 0) {
-      resetControls();
+      controls.reset();
       return;
     }
 
@@ -58,84 +62,40 @@ function countDownSeconds() {
 
 //Evento botão play/pause
 playButton.addEventListener("click", function () {
-  playButton.classList.add("hide");
-  pauseButton.classList.remove("hide");
-  addButton.setAttribute("disabled", "disabled");
-  subtractButton.setAttribute("disabled", "disabled");
+  controls.play();
   countDownSeconds();
 });
 
 pauseButton.addEventListener("click", function () {
-  resetControls();
+  controls.reset();
   clearTimeout(timerTimeOut);
 });
 
-addButton.addEventListener("click", function () {
-  if (count <= 90) {
-    count = count + 5;
-  }
+stopButton.addEventListener("click", function () {
+  controls.stop();
+});
 
-  minutesDisplay.textContent = String(count).padStart(2, "0");
+addButton.addEventListener("click", function () {
+  controls.add();
 });
 
 subtractButton.addEventListener("click", function () {
-  if (count <= 0) {
-    subtractButton.disable = true;
-  } else if (count >= 5) {
-    subtractButton.disable = false;
-    count = count - 5;
-  }
-
-  minutesDisplay.textContent = String(count).padStart(2, "0");
-});
-
-stopButton.addEventListener("click", function () {
-  resetControls();
-  updateStandardTimeValue(standardMinutes, standardSeconds);
-  count = 0;
+  controls.subtract();
 });
 
 //Eventos Cards
 forestCard.addEventListener("click", function () {
-  forestCard.classList.toggle("cardSound");
-  forestCard.classList.toggle("activeCard");
-  rainCard.classList.remove("activeCard");
-  rainCard.classList.add("cardSound");
-  coffeShopCard.classList.remove("activeCard");
-  coffeShopCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+  controls.forestCardActive();
 });
 
 rainCard.addEventListener("click", function () {
-  rainCard.classList.toggle("cardSound");
-  rainCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  coffeShopCard.classList.remove("activeCard");
-  coffeShopCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+  controls.rainCardActive();
 });
 
 coffeShopCard.addEventListener("click", function () {
-  coffeShopCard.classList.toggle("cardSound");
-  coffeShopCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  rainCard.classList.remove("activeCard");
-  rainCard.classList.add("cardSound");
-  firePlaceCard.classList.remove("activeCard");
-  firePlaceCard.classList.add("cardSound");
+  controls.coffeShopCardActive();
 });
 
 firePlaceCard.addEventListener("click", function () {
-  firePlaceCard.classList.toggle("cardSound");
-  firePlaceCard.classList.toggle("activeCard");
-  forestCard.classList.remove("activeCard");
-  rainCard.classList.remove("activeCard");
-  coffeShopCard.classList.remove("activeCard");
-  forestCard.classList.add("cardSound");
-  rainCard.classList.add("cardSound");
-  coffeShopCard.classList.add("cardSound");
+  controls.firePlaceCardActive();
 });
