@@ -9,9 +9,13 @@ const stopButton = document.querySelector("#stopButton");
 const addButton = document.querySelector("#addButton");
 const subtractButton = document.querySelector("#subtractButton");
 const forestCard = document.querySelector("#forestCard");
+const forestSound = document.querySelector("#forestSound");
 const rainCard = document.querySelector("#rainCard");
+const rainSound = document.querySelector("#rainSound");
 const coffeShopCard = document.querySelector("#coffeShopCard");
+const coffeShopSound = document.querySelector("#coffeShopSound");
 const firePlaceCard = document.querySelector("#firePlaceCard");
+const firePlaceSound = document.querySelector("#firePlaceSound");
 const standardMinutes = 0;
 const standardSeconds = 0;
 let timerTimeOut;
@@ -60,16 +64,48 @@ subtractButton.addEventListener("click", function () {
 //Eventos Cards
 forestCard.addEventListener("click", function () {
   controls.forestCardActive();
+  if (forestCard.classList.contains("activeCard")) {
+    forestSound.play();
+    rainSound.pause();
+    coffeShopSound.pause();
+    firePlaceSound.pause();
+  } else {
+    forestSound.pause();
+  }
 });
 
 rainCard.addEventListener("click", function () {
   controls.rainCardActive();
+  if (rainCard.classList.contains("activeCard")) {
+    forestSound.pause();
+    rainSound.play();
+    coffeShopSound.pause();
+    firePlaceSound.pause();
+  } else {
+    rainSound.pause();
+  }
 });
 
 coffeShopCard.addEventListener("click", function () {
   controls.coffeShopCardActive();
+  if (coffeShopCard.classList.contains("activeCard")) {
+    forestSound.pause();
+    rainSound.pause();
+    coffeShopSound.play();
+    firePlaceSound.pause();
+  } else {
+    coffeShopSound.pause();
+  }
 });
 
 firePlaceCard.addEventListener("click", function () {
   controls.firePlaceCardActive();
+  if (firePlaceCard.classList.contains("activeCard")) {
+    forestSound.pause();
+    rainSound.pause();
+    coffeShopSound.pause();
+    firePlaceSound.play();
+  } else {
+    firePlaceSound.pause();
+  }
 });
