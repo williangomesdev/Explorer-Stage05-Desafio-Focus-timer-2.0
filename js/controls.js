@@ -8,7 +8,7 @@ export default function Controls({
   standardSeconds,
   minutesDisplay,
   secondsDisplay,
-  updateStandardTimeValue,
+  timer,
 }) {
   //Controls resetar controles para o padrão
   function reset() {
@@ -26,7 +26,6 @@ export default function Controls({
   }
   function stop() {
     reset();
-    updateStandardTimeValue(standardMinutes, standardSeconds);
     count = 0;
   }
   function add() {

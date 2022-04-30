@@ -1,4 +1,5 @@
 import Controls from "./controls.js";
+import Timer from "./timer.js";
 
 const minutesDisplay = document.querySelector("#minutes");
 const secondsDisplay = document.querySelector("#seconds");
@@ -16,6 +17,12 @@ const standardSeconds = 0;
 let timerTimeOut;
 let count = 0;
 
+const timer = Timer({
+  minutesDisplay,
+  secondsDisplay,
+  timerTimeOut,
+});
+
 const controls = Controls({
   playButton,
   pauseButton,
@@ -26,29 +33,17 @@ const controls = Controls({
   standardSeconds,
   minutesDisplay,
   secondsDisplay,
-  updateStandardTimeValue,
+  timer,
 });
-
-//Timer Converter elemento em valor numérico
-function displayNumber(display) {
-  let number = Number(display.textContent);
-  return number;
-}
-
-//Timer Atualização de valores do timer
-function updateStandardTimeValue(minutesValue, secondsValue) {
-  minutesDisplay.textContent = String(minutesValue).padStart(2, "0");
-  secondsDisplay.textContent = String(secondsValue).padStart(2, "0");
-}
 
 //Timer countdown
 function countDownSeconds() {
   timerTimeOut = setTimeout(function () {
-    let seconds = displayNumber(secondsDisplay);
-    let minutes = displayNumber(minutesDisplay);
+    let seconds = timer.displayNumber(secondsDisplay);
+    let minutes = timer.displayNumber(minutesDisplay);
 
     if (minutes == 0 && seconds == 0) {
-      controls.reset();
+      resetControls();
       return;
     }
 
@@ -57,7 +52,7 @@ function countDownSeconds() {
       --minutes;
     }
 
-    updateStandardTimeValue(minutes, String(seconds - 1));
+    timer.updateStandardTimeValue(minutes, String(seconds - 1));
 
     countDownSeconds();
   }, 1000);
@@ -76,6 +71,7 @@ pauseButton.addEventListener("click", function () {
 
 stopButton.addEventListener("click", function () {
   controls.stop();
+  timer.updateStandardTimeValue(standardMinutes, standardSeconds);
 });
 
 addButton.addEventListener("click", function () {
