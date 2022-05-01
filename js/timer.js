@@ -1,9 +1,10 @@
 export default function Timer({
   minutesDisplay,
   secondsDisplay,
-  timerTimeOut,
   resetControls,
 }) {
+  let timerTimeOut;
+
   //Timer Converter elemento em valor numérico
   function displayNumber(display) {
     let number = Number(display.textContent);
@@ -38,8 +39,13 @@ export default function Timer({
     }, 1000);
   }
 
+  function holdCountdown() {
+    clearTimeout(timerTimeOut);
+  }
+
   return {
     updateStandardTimeValue,
     countDownSeconds,
+    holdCountdown,
   };
 }

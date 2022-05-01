@@ -19,7 +19,6 @@ const firePlaceCard = document.querySelector("#firePlaceCard");
 const firePlaceSound = document.querySelector("#firePlaceSound");
 const standardMinutes = 0;
 const standardSeconds = 0;
-let timerTimeOut;
 let count = 0;
 
 const controls = Controls({
@@ -34,7 +33,6 @@ const controls = Controls({
 const timer = Timer({
   minutesDisplay,
   secondsDisplay,
-  timerTimeOut,
   resetControls: controls.reset,
 });
 
@@ -54,7 +52,7 @@ playButton.addEventListener("click", function () {
 
 pauseButton.addEventListener("click", function () {
   controls.reset();
-  clearTimeout(timerTimeOut);
+  timer.holdCountdown();
 });
 
 stopButton.addEventListener("click", function () {
