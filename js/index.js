@@ -1,6 +1,6 @@
-
 import Controls from "./controls.js";
 import Timer from "./timer.js";
+import SoundCards from "./soundCards.js";
 
 const minutesDisplay = document.querySelector("#minutes");
 const secondsDisplay = document.querySelector("#seconds");
@@ -38,6 +38,14 @@ const timer = Timer({
   resetControls: controls.reset,
 });
 
+const soundCards = SoundCards({
+  forestCard,
+  forestSound,
+  rainSound,
+  coffeShopSound,
+  firePlaceSound,
+});
+
 //Evento botão play/pause
 playButton.addEventListener("click", function () {
   controls.play();
@@ -65,48 +73,20 @@ subtractButton.addEventListener("click", function () {
 //Eventos Cards
 forestCard.addEventListener("click", function () {
   controls.forestCardActive();
-  if (forestCard.classList.contains("activeCard")) {
-    forestSound.play();
-    rainSound.pause();
-    coffeShopSound.pause();
-    firePlaceSound.pause();
-  } else {
-    forestSound.pause();
-  }
+  soundCards.forestCardSound();
 });
 
 rainCard.addEventListener("click", function () {
   controls.rainCardActive();
-  if (rainCard.classList.contains("activeCard")) {
-    forestSound.pause();
-    rainSound.play();
-    coffeShopSound.pause();
-    firePlaceSound.pause();
-  } else {
-    rainSound.pause();
-  }
+  soundCards.rainCardSound();
 });
 
 coffeShopCard.addEventListener("click", function () {
   controls.coffeShopCardActive();
-  if (coffeShopCard.classList.contains("activeCard")) {
-    forestSound.pause();
-    rainSound.pause();
-    coffeShopSound.play();
-    firePlaceSound.pause();
-  } else {
-    coffeShopSound.pause();
-  }
+  soundCards.coffeShopCardSound();
 });
 
 firePlaceCard.addEventListener("click", function () {
   controls.firePlaceCardActive();
-  if (firePlaceCard.classList.contains("activeCard")) {
-    forestSound.pause();
-    rainSound.pause();
-    coffeShopSound.pause();
-    firePlaceSound.play();
-  } else {
-    firePlaceSound.pause();
-  }
+  soundCards.firePlaceCardSound();
 });
